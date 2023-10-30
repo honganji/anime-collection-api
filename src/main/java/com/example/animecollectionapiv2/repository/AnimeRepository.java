@@ -5,7 +5,7 @@ import com.example.animecollectionapiv2.entity.Anime;
 import java.util.List;
 
 public interface AnimeRepository {
-    void create(Anime anime);
+    boolean create(Anime anime);
     Anime selectById(Long id);
     List<Anime> selectAll();
     boolean update(Long id, Anime anime);

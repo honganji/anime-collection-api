@@ -14,8 +14,9 @@ public class AnimeController {
     }
 
     @PostMapping("/api/anime")
-    public void create(@RequestBody Anime newAnime) {
-        animeService.create(newAnime);
+    public String create(@RequestBody Anime newAnime) {
+        boolean isSucceed = animeService.create(newAnime);
+        return isSucceed ? "The creation is done successfully!" : "The creation is failed";
     }
     @GetMapping("/api/animes")
     public List<Anime> getAll() {
@@ -26,6 +27,7 @@ public class AnimeController {
     public Anime get(@PathVariable Long id) {
         return animeService.findById(id);
     }
+
     @PutMapping("/api/animes/{id}")
     public String update(@PathVariable Long id, @RequestBody Anime newAnime) {
         boolean isSucceed = animeService.update(id, newAnime);

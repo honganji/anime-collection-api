@@ -24,8 +24,8 @@ public class AnimeServiceImpl implements AnimeService{
     }
 
     @Override
-    public void create(Anime anime) {
-        animeRepository.create(anime);
+    public boolean create(Anime anime) {
+        return animeRepository.create(anime);
     }
 
     @Override

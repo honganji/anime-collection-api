@@ -14,8 +14,8 @@ public class JdbcAnimeRepository implements AnimeRepository{
     public JdbcAnimeRepository(JdbcTemplate jdbcTemplate) { this.jdbcTemplate = jdbcTemplate; }
 
     @Override
-    public void create(Anime anime) {
-        jdbcTemplate.update(
+    public boolean create(Anime anime) {
+        int count = jdbcTemplate.update(
                 "INSERT INTO animes (author_id, genre_id, name, thumbnail_url, trailer_id, mad_id, episode, series, description, story, started_date) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
                 anime.getAuthorId(),
                 anime.getGenreId(),
@@ -29,6 +29,7 @@ public class JdbcAnimeRepository implements AnimeRepository{
                 anime.getStory(),
                 anime.getStartedDate()
         );
+        return count != 0;
     }
 
     @Override
@@ -65,16 +66,12 @@ public class JdbcAnimeRepository implements AnimeRepository{
                 anime.getStartedDate(),
                 id
         );
-        if(count == 0) {
-            return false;
-        }
-        return true;
+        return count != 0;
     }
 
     @Override
     public boolean delete(Long id) {
         int count = jdbcTemplate.update("DELETE FROM animes WHERE id=?", id);
-        if(count == 0) return false;
-        return true;
+        return count != 0;
     }
 }
