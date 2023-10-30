@@ -3,6 +3,7 @@ package com.example.animecollectionapiv2.entity;
 import jakarta.persistence.*;
 
 @Entity
+@Table(name = "authors")
 public class Author {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
