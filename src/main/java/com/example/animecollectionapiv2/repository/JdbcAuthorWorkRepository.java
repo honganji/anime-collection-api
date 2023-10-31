@@ -36,7 +36,7 @@ public class JdbcAuthorWorkRepository implements AuthorWorkRepository{
     @Override
     public boolean update(Long id, AuthorWork authorWork) {
         int count = jdbcTemplate.update(
-                "UPDATE author_works SET author_id=?, name=?",
+                "UPDATE author_works SET author_id=?, name=? WHERE id=?",
                 authorWork.getAuthorId(),
                 authorWork.getName(),
                 id

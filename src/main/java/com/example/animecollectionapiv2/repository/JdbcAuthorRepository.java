@@ -34,9 +34,10 @@ public class JdbcAuthorRepository implements  AuthorRepository{
     @Override
     public boolean update(Long id, Author author) {
         int count = jdbcTemplate.update(
-                "UPDATE authors SET name=?, img_url=?",
+                "UPDATE authors SET name=?, img_url=?  WHERE id=?",
                 author.getName(),
-                author.getImgUrl()
+                author.getImgUrl(),
+                id
         );
         return count != 0;
     }
