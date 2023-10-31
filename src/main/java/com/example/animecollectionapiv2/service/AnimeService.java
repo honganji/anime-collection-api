@@ -3,11 +3,12 @@ package com.example.animecollectionapiv2.service;
 import com.example.animecollectionapiv2.entity.Anime;
 
 import java.util.List;
+import java.util.Map;
 
 public interface AnimeService {
-    List<Anime> findAll();
-    Anime findById(Long id);
-    void create(Anime anime);
+    List<Map<String, Object>> findAll();
+    List<Map<String, Object>> findById(Long id);
+    boolean create(Anime anime);
     boolean update(Long id, Anime anime);
     boolean delete(Long id);
 }

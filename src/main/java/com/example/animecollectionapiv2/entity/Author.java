@@ -7,11 +7,32 @@ import jakarta.persistence.*;
 public class Author {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
-
-    @Column(columnDefinition = "BIGINT", name = "anime_id")
-    private String anime_id;
+    private Long id;
     private String name;
     @Column(columnDefinition = "LONGTEXT", name="img_url")
-    private String img_url;
+    private String imgUrl;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getImgUrl() {
+        return imgUrl;
+    }
+
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
+    }
 }

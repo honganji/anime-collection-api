@@ -5,6 +5,7 @@ import com.example.animecollectionapiv2.service.AnimeService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 public class AnimeController {
@@ -14,18 +15,20 @@ public class AnimeController {
     }
 
     @PostMapping("/api/anime")
-    public void create(@RequestBody Anime newAnime) {
-        animeService.create(newAnime);
+    public String create(@RequestBody Anime newAnime) {
+        boolean isSucceed = animeService.create(newAnime);
+        return isSucceed ? "The creation is done successfully!" : "The creation is failed";
     }
     @GetMapping("/api/animes")
-    public List<Anime> getAll() {
+    public List<Map<String, Object>> getAll() {
         return animeService.findAll();
     }
 
     @GetMapping("/api/animes/{id}")
-    public Anime get(@PathVariable Long id) {
+    public List<Map<String, Object>> get(@PathVariable Long id) {
         return animeService.findById(id);
     }
+
     @PutMapping("/api/animes/{id}")
     public String update(@PathVariable Long id, @RequestBody Anime newAnime) {
         boolean isSucceed = animeService.update(id, newAnime);
