@@ -3,14 +3,11 @@ package com.example.animecollectionapiv2.entity;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "author_works")
-public class AuthorWork {
+@Table(name = "genres")
+public class Genre {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
-    @Column(name = "author_id")
-    private Long authorId;
 
     @Column(name = "name")
     private String name;
@@ -21,14 +18,6 @@ public class AuthorWork {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Long getAuthorId() {
-        return authorId;
-    }
-
-    public void setAuthorId(Long authorId) {
-        this.authorId = authorId;
     }
 
     public String getName() {

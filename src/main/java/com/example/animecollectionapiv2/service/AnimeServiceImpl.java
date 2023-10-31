@@ -5,6 +5,7 @@ import com.example.animecollectionapiv2.repository.AnimeRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class AnimeServiceImpl implements AnimeService{
@@ -14,18 +15,18 @@ public class AnimeServiceImpl implements AnimeService{
     }
 
     @Override
-    public List<Anime> findAll() {
+    public List<Map<String, Object>> findAll() {
         return animeRepository.selectAll();
     }
 
     @Override
-    public Anime findById(Long id) {
+    public List<Map<String, Object>> findById(Long id) {
         return animeRepository.selectById(id);
     }
 
     @Override
-    public void create(Anime anime) {
-        animeRepository.create(anime);
+    public boolean create(Anime anime) {
+        return animeRepository.create(anime);
     }
 
     @Override
