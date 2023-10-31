@@ -7,16 +7,16 @@ import jakarta.persistence.*;
 public class Author {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+    private Long id;
     private String name;
     @Column(columnDefinition = "LONGTEXT", name="img_url")
-    private String img_url;
+    private String imgUrl;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -28,11 +28,11 @@ public class Author {
         this.name = name;
     }
 
-    public String getImg_url() {
-        return img_url;
+    public String getImgUrl() {
+        return imgUrl;
     }
 
-    public void setImg_url(String img_url) {
-        this.img_url = img_url;
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
     }
 }

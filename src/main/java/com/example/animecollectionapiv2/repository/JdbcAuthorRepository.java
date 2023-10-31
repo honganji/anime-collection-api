@@ -17,7 +17,7 @@ public class JdbcAuthorRepository implements  AuthorRepository{
         int count = jdbcTemplate.update(
                 "INSERT INTO authors (name, img_url) VALUES(?, ?)",
                 author.getName(),
-                author.getImg_url()
+                author.getImgUrl()
         );
         return count != 0;
     }
@@ -36,7 +36,7 @@ public class JdbcAuthorRepository implements  AuthorRepository{
         int count = jdbcTemplate.update(
                 "UPDATE authors SET name=?, img_url=?",
                 author.getName(),
-                author.getImg_url()
+                author.getImgUrl()
         );
         return count != 0;
     }
