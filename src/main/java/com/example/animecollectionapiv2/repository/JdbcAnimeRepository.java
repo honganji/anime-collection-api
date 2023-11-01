@@ -57,7 +57,7 @@ public class JdbcAnimeRepository implements AnimeRepository{
                 "animes.series as 'series', " +
                 "animes.description as 'description', " +
                 "animes.story as 'story', " +
-                "animes.genre_id as 'genre', " +
+                "genres.name as 'genre', " +
                 "animes.started_date as 'started_date', " +
                 "animes.id as 'images', " +
                 "animes.id as 'characters', " +
@@ -65,6 +65,7 @@ public class JdbcAnimeRepository implements AnimeRepository{
                 "FROM animes " +
                 "JOIN authors ON animes.author_id = authors.id " +
                 "JOIN author_works ON authors.id = author_works.author_id " +
+                "JOIN genres ON genres.id = animes.genre_id " +
                 "AND animes.id=?";
         String authorWorkSql = "SELECT name FROM author_works WHERE author_id=?";
         String imageSql = "SELECT url FROM images WHERE anime_id=?";
@@ -87,26 +88,16 @@ public class JdbcAnimeRepository implements AnimeRepository{
 
     @Override
     public List<Map<String, Object>> selectAll() {
-        List<Map<String, Object>> json = null;
-        final String sql = "SELECT " +
-                "animes.id as 'anime_id', " +
-                "animes.name as 'name', " +
-                "animes.thumbnail_url as 'image_url', " +
-                "animes.trailer_id as 'trailer_id', " +
-                "animes.mad_id as 'mad_id', " +
-                "authors.name as 'author', " +
-                "authors.img_url as 'author_img', " +
-                "animes.author_id as 'author_work(not yet)', " +
-                "animes.episode as 'episodes', " +
-                "animes.series as 'serises', " +
-                "animes.description as 'description', " +
-                "animes.story as 'story', " +
-                "animes.genre_id as 'genre(not yet)', " +
-                "animes.started_date as 'started_date', " +
-                "animes.id as 'images(Not yet)', " +
-                "animes.id as 'characters(Not yet)' " +
-                "FROM animes JOIN authors ON animes.author_id = authors.id";
-        json = jdbcTemplate.queryForList(sql);
+        List<Long> idList = new ArrayList<Long>();
+        List<Map<String, Object>> idJson = null;
+        List<Map<String, Object>> json = new ArrayList<>();
+        final String idSql = "SELECT id FROM animes";
+        idJson = jdbcTemplate.queryForList(idSql);
+        idJson.forEach(element -> idList.add((Long) element.get("id")));
+        System.out.println(idList);
+        idList.forEach(id ->{
+            json.add(selectById(id).get(0));
+        });
         return json;
     }
 
