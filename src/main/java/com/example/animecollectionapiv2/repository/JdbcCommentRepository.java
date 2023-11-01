@@ -35,7 +35,8 @@ public class JdbcCommentRepository implements CommentRepository{
         String sql = "SELECT anime_id, user_id, content " +
                 "FROM comments " +
                 "WHERE anime_id=? " +
-                "ORDER BY created_time desc";
+                "ORDER BY created_time desc " +
+                "LIMIT 15";
         json = jdbcTemplate.queryForList(sql, id);
         return json;
     }

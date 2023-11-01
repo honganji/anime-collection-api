@@ -94,7 +94,6 @@ public class JdbcAnimeRepository implements AnimeRepository{
         final String idSql = "SELECT id FROM animes";
         idJson = jdbcTemplate.queryForList(idSql);
         idJson.forEach(element -> idList.add((Long) element.get("id")));
-        System.out.println(idList);
         idList.forEach(id ->{
             json.add(selectById(id).get(0));
         });
