@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
+@CrossOrigin("http://localhost:3000")
 public class AnimeController {
     private final AnimeService animeService;
     public AnimeController(AnimeService animeService) {
