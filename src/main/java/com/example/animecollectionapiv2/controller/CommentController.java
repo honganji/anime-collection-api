@@ -9,7 +9,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/comments")
-@CrossOrigin("http://localhost:3000")
+@CrossOrigin(origins = {"http://localhost:3000", "https://anime-collection-fullstack.vercel.app"})
 public class CommentController {
     private final CommentService commentService;
     public CommentController(CommentService commentService) {
