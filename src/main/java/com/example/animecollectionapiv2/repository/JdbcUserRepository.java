@@ -1,7 +1,6 @@
 package com.example.animecollectionapiv2.repository;
 
 import com.example.animecollectionapiv2.entity.User;
-import com.example.animecollectionapiv2.service.UserService;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.DataClassRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -15,14 +14,14 @@ public class JdbcUserRepository implements UserRepository {
     }
 
     @Override
-    public User selectByLogin(String login) {
-        String sql = "SELECT * FROM users WHERE login=?";
+    public User selectByEmailAddress(String emailAddress) {
+        String sql = "SELECT * FROM users WHERE email_address=?";
         User data;
         try{
             data = jdbcTemplate.queryForObject(
                     sql,
                     new DataClassRowMapper<>(User.class),
-                    login
+                    emailAddress
             );
         } catch (EmptyResultDataAccessException e){
             return null;
@@ -32,12 +31,11 @@ public class JdbcUserRepository implements UserRepository {
 
     @Override
     public boolean create(User user) {
-        String sql = "";
+        String sql = "INSERT INTO users (name, email_address, password) VALUES(?, ?, ?)";
         int count = jdbcTemplate.update(
-                "INSERT INTO users (first_name, last_name, login, password) VALUES(?, ?, ?, ?)",
-                user.getFirstName(),
-                user.getLastName(),
-                user.getLogin(),
+                sql,
+                user.getName(),
+                user.getEmailAddress(),
                 user.getPassword()
         );
         return count != 0;

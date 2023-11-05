@@ -4,7 +4,7 @@ import com.example.animecollectionapiv2.config.UserAuthProvider;
 import com.example.animecollectionapiv2.dto.CredentialsDto;
 import com.example.animecollectionapiv2.dto.SignUpDto;
 import com.example.animecollectionapiv2.dto.UserDto;
-import com.example.animecollectionapiv2.service.UserService;
+import com.example.animecollectionapiv2.service.UserServiceImpl;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +19,7 @@ import java.net.URI;
 @RestController
 @CrossOrigin(origins = {"http://localhost:3000", "http://localhost:4200/", "https://anime-collection-fullstack.vercel.app"})
 public class AuthController {
-    private final UserService userService;
+    private final UserServiceImpl userService;
     private final UserAuthProvider userAuthProvider;
 
     @PostMapping("/login")
@@ -30,9 +30,9 @@ public class AuthController {
         return ResponseEntity.ok(user);
     }
 
-    @PostMapping("register")
-    public ResponseEntity<UserDto> register(@RequestBody @Valid SignUpDto signUpDto) {
-        UserDto user = userService.register(signUpDto);
+    @PostMapping("/signup")
+    public ResponseEntity<UserDto> signup(@RequestBody @Valid SignUpDto signUpDto) {
+        UserDto user = userService.signup(signUpDto);
         user.setToken(userAuthProvider.createToken(user));
         return ResponseEntity.created(URI.create("/users/" + user.getId())).body(user);
     }
