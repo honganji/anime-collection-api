@@ -5,8 +5,10 @@ import com.example.animecollectionapiv2.dto.CredentialsDto;
 import com.example.animecollectionapiv2.dto.SignUpDto;
 import com.example.animecollectionapiv2.dto.UserDto;
 import com.example.animecollectionapiv2.service.UserService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,22 +17,23 @@ import java.net.URI;
 
 @RequiredArgsConstructor
 @RestController
+@CrossOrigin(origins = {"http://localhost:3000", "http://localhost:4200/", "https://anime-collection-fullstack.vercel.app"})
 public class AuthController {
     private final UserService userService;
     private final UserAuthProvider userAuthProvider;
 
     @PostMapping("/login")
-    public ResponseEntity<UserDto> login(@RequestBody CredentialsDto credentialsDto) {
+    public ResponseEntity<UserDto> login(@RequestBody @Valid CredentialsDto credentialsDto) {
         UserDto user = userService.login(credentialsDto);
 
-        user.setToken(userAuthProvider.createToken(user.getLogin()));
+        user.setToken(userAuthProvider.createToken(user));
         return ResponseEntity.ok(user);
     }
 
     @PostMapping("register")
-    public ResponseEntity<UserDto> register(@RequestBody SignUpDto signUpDto) {
+    public ResponseEntity<UserDto> register(@RequestBody @Valid SignUpDto signUpDto) {
         UserDto user = userService.register(signUpDto);
-        user.setToken(userAuthProvider.createToken(user.getLogin()));
+        user.setToken(userAuthProvider.createToken(user));
         return ResponseEntity.created(URI.create("/users/" + user.getId())).body(user);
     }
 }

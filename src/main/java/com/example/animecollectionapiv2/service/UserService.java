@@ -24,16 +24,16 @@ public class UserService {
 
     public UserDto findByLogin(String login) {
         User user = userRepository.selectByLogin(login);
-        if(user.getLogin() == null) {
-            new AppException("Unknown user", HttpStatus.NOT_FOUND);
+        if(user == null) {
+            throw new AppException("Unknown user", HttpStatus.NOT_FOUND);
         }
         return userMapper.toUserDto(user);
     }
 
     public UserDto login(CredentialsDto credentialsDto) {
         User user = userRepository.selectByLogin(credentialsDto.getLogin());
-        if(user.getLogin() == null) {
-            new AppException("Unknown user", HttpStatus.NOT_FOUND);
+        if(user == null) {
+            throw new AppException("Unknown user", HttpStatus.NOT_FOUND);
         }
 
         if(passwordEncoder.matches(CharBuffer.wrap(credentialsDto.getPassword()), user.getPassword())) {
@@ -55,7 +55,7 @@ public class UserService {
 
         user.setPassword(passwordEncoder.encode(CharBuffer.wrap(userDto.getPassword())));
 
-        User saveUser = userRepository.save(user);
+        userRepository.create(user);
 
         return userMapper.toUserDto(user);
     }

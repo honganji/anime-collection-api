@@ -6,4 +6,5 @@ import java.util.Optional;
 
 public interface UserRepository {
     User selectByLogin(String login);
+    boolean create(User user);
 }
