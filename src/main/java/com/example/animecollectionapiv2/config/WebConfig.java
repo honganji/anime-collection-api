@@ -24,7 +24,8 @@ public class WebConfig {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowCredentials(true);
-        config.setAllowedOrigins(Arrays.asList("http://localhost:4200", "http://localhost:3000", "https://anime-collection-fullstack.vercel.app"));
+//        config.setAllowedOrigins(Arrays.asList("http://localhost:4200", "http://localhost:3000", "https://anime-collection-fullstack.vercel.app"));
+        config.addAllowedOrigin("http://localhost:3000");
         config.setAllowedHeaders(Arrays.asList(
                 HttpHeaders.AUTHORIZATION,
                 HttpHeaders.CONTENT_TYPE,

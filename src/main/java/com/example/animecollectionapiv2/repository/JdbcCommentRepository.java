@@ -32,8 +32,9 @@ public class JdbcCommentRepository implements CommentRepository{
     @Override
     public List<Map<String, Object>> selectById(Long id) {
         List<Map<String, Object>> json = null;
-        String sql = "SELECT anime_id, user_id, content " +
+        String sql = "SELECT anime_id, user_id, content, name " +
                 "FROM comments " +
+                "JOIN users ON comments.user_id = users.id " +
                 "WHERE anime_id=? " +
                 "ORDER BY created_time desc " +
                 "LIMIT 15";

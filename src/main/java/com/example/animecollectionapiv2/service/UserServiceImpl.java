@@ -59,6 +59,10 @@ public class UserServiceImpl implements UserService{
 
         userRepository.create(user);
 
+        User dbUser = userRepository.selectByEmailAddress(user.getEmailAddress());
+
+        user.setId(dbUser.getId());
+
         return userMapper.toUserDto(user);
     }
 }

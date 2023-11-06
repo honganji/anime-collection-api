@@ -80,7 +80,7 @@ public class JdbcAnimeRepository implements AnimeRepository{
         imageJson.forEach(element -> imageList.add((String) element.get("url")));
         characterJson.forEach(element -> characterList.add(element));
 
-        json.get(0).put("author_work", authorWorkList);
+        json.get(0).put("author_works", authorWorkList);
         json.get(0).put("images", imageList);
         json.get(0).put("characters", characterList);
         return json;
