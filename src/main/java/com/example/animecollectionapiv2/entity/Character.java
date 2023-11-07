@@ -9,19 +9,19 @@ public class Character {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "anime_id")
+    @Column(name = "anime_id", nullable = false)
     private Long animeId;
 
-    @Column(name = "voice_actor_id")
+    @Column(name = "voice_actor_id", nullable = false)
     private Long voiceActorId;
 
-    @Column(columnDefinition = "LONGTEXT", name = "img_url")
+    @Column(columnDefinition = "LONGTEXT", name = "img_url", nullable = false)
     private String imgUrl;
 
-    @Column(columnDefinition = "LONGTEXT", name = "feature")
+    @Column(columnDefinition = "LONGTEXT", nullable = false)
     private String feature;
 
-    @Column(name = "name")
+    @Column(name = "name", nullable = false)
     private String name;
 
     public Long getId() {

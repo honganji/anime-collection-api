@@ -11,16 +11,16 @@ public class Comment {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "anime_id")
+    @Column(name = "anime_id", nullable = false)
     private Long animeId;
 
-    @Column(name = "user_id")
+    @Column(name = "user_id", nullable = false)
     private Long userId;
 
-    @Column(columnDefinition = "LONGTEXT", name = "content")
+    @Column(columnDefinition = "LONGTEXT", nullable = false)
     private String content;
 
-    @Column(name = "created_time")
+    @Column(name = "created_time", nullable = false)
     private Date createdTime;
 
     public Long getId() {

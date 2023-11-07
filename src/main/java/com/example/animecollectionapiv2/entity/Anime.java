@@ -11,27 +11,27 @@ public class Anime {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "author_id")
+    @Column(name = "author_id", nullable = false)
     private Long authorId;
-    @Column(name = "genre_id")
+    @Column(name = "genre_id", nullable = false)
     private Long genreId;
-    @Column(name = "name")
+    @Column(nullable = false)
     private String name;
-    @Column(columnDefinition = "LONGTEXT", name = "thumbnail_url")
+    @Column(columnDefinition = "LONGTEXT", name = "thumbnail_url", nullable = false)
     private String thumbnailUrl;
-    @Column(name = "trailer_id")
+    @Column(name = "trailer_id", nullable = false)
     private String trailerId;
-    @Column(name = "mad_id")
+    @Column(name = "mad_id", nullable = false)
     private String madId;
-    @Column(name = "episode")
+    @Column(nullable = false)
     private Integer episode;
-    @Column(name = "series")
+    @Column(nullable = false)
     private Integer series;
-    @Column(columnDefinition = "LONGTEXT",name = "description")
+    @Column(columnDefinition = "LONGTEXT", nullable = false)
     private String description;
-    @Column(columnDefinition = "LONGTEXT",name = "story")
+    @Column(columnDefinition = "LONGTEXT", nullable = false)
     private String story;
-    @Column(columnDefinition = "DATETIME",name = "started_date")
+    @Column(columnDefinition = "DATETIME", name = "started_date", nullable = false)
     private Date startedDate;
 
     public Long getId() {

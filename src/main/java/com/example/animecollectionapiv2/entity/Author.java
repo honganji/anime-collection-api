@@ -8,8 +8,9 @@ public class Author {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @Column(nullable = false)
     private String name;
-    @Column(columnDefinition = "LONGTEXT", name="img_url")
+    @Column(columnDefinition = "LONGTEXT", name="img_url", nullable = false)
     private String imgUrl;
 
     public Long getId() {

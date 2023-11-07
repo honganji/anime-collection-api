@@ -17,7 +17,6 @@ import java.net.URI;
 
 @RequiredArgsConstructor
 @RestController
-@CrossOrigin(origins = {"http://localhost:3000", "http://localhost:4200/", "https://anime-collection-fullstack.vercel.app"})
 public class AuthController {
     private final UserServiceImpl userService;
     private final UserAuthProvider userAuthProvider;

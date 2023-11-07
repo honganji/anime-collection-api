@@ -9,10 +9,10 @@ public class AuthorWork {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "author_id")
+    @Column(name = "author_id", nullable = false)
     private Long authorId;
 
-    @Column(name = "name")
+    @Column(nullable = false)
     private String name;
 
     public Long getId() {

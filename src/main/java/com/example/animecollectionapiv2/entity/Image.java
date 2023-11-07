@@ -9,10 +9,10 @@ public class Image {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "anime_id")
+    @Column(name = "anime_id", nullable = false)
     private Long animeId;
 
-    @Column(columnDefinition = "LONGTEXT", name = "url")
+    @Column(columnDefinition = "LONGTEXT", nullable = false)
     private String url;
 
     public Long getId() {

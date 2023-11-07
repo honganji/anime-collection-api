@@ -36,14 +36,6 @@ public class JdbcAnimeRepository implements AnimeRepository{
 
     @Override
     public List<Map<String, Object>> selectById(Long id) {
-        List<Map<String, Object>> json = null;
-        List<Map<String, Object>> authorWorkJson = null;
-        List<String> authorWorkList = new ArrayList<String>();
-        List<Map<String, Object>> imageJson = null;
-        List<String> imageList = new ArrayList<String>();
-        List<Map<String, Object>> characterJson = null;
-        List<Map<String, Object>> characterList = new ArrayList<Map<String, Object>>();
-
         String sql = "SELECT " +
                 "animes.id as 'anime_id', " +
                 "animes.name as 'name', " +
@@ -67,37 +59,13 @@ public class JdbcAnimeRepository implements AnimeRepository{
                 "JOIN author_works ON authors.id = author_works.author_id " +
                 "JOIN genres ON genres.id = animes.genre_id " +
                 "AND animes.id=?";
-        String authorWorkSql = "SELECT name FROM author_works WHERE author_id=?";
-        String imageSql = "SELECT url FROM images WHERE anime_id=?";
-        String characterSql = "SELECT name, img_url, feature FROM characters WHERE anime_id=?";
-
-        json = jdbcTemplate.queryForList(sql, id);
-        authorWorkJson = jdbcTemplate.queryForList(authorWorkSql, json.get(0).get("author_id"));
-        imageJson = jdbcTemplate.queryForList(imageSql, id);
-        characterJson = jdbcTemplate.queryForList(characterSql, id);
-
-        authorWorkJson.forEach(element -> authorWorkList.add((String) element.get("name")));
-        imageJson.forEach(element -> imageList.add((String) element.get("url")));
-        characterJson.forEach(element -> characterList.add(element));
-
-        json.get(0).put("author_works", authorWorkList);
-        json.get(0).put("images", imageList);
-        json.get(0).put("characters", characterList);
-        return json;
+        return jdbcTemplate.queryForList(sql, id);
     }
 
     @Override
-    public List<Map<String, Object>> selectAll() {
-        List<Long> idList = new ArrayList<Long>();
-        List<Map<String, Object>> idJson = null;
-        List<Map<String, Object>> json = new ArrayList<>();
-        final String idSql = "SELECT id FROM animes";
-        idJson = jdbcTemplate.queryForList(idSql);
-        idJson.forEach(element -> idList.add((Long) element.get("id")));
-        idList.forEach(id ->{
-            json.add(selectById(id).get(0));
-        });
-        return json;
+    public List<Map<String, Object>> getAllId() {
+        final String sql = "SELECT id FROM animes";
+        return jdbcTemplate.queryForList(sql);
     }
 
     @Override
