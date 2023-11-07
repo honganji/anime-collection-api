@@ -20,14 +20,14 @@ public class User {
     private Long id;
 
     @Column(nullable = false)
-    @Size(max = 100)
+    @Size(max = 20)
     private String name;
 
     @Column(name = "email_address", nullable = false)
-    @Size(max = 100)
+    @Size(max = 20)
     private String emailAddress;
 
     @Column(nullable = false)
-    @Size(max = 100)
+    @Size(max = 20, min = 4)
     private String password;
 }
