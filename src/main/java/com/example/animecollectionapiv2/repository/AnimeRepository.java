@@ -8,7 +8,6 @@ import java.util.Map;
 public interface AnimeRepository {
     boolean create(Anime anime);
     List<Map<String, Object>> selectById(Long id);
-    List<Map<String, Object>> selectAll();
     List<Map<String, Object>> getAllId();
     boolean update(Long id, Anime anime);
     boolean delete(Long id);

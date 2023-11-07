@@ -63,20 +63,6 @@ public class JdbcAnimeRepository implements AnimeRepository{
     }
 
     @Override
-    public List<Map<String, Object>> selectAll() {
-        List<Long> idList = new ArrayList<Long>();
-        List<Map<String, Object>> idJson = null;
-        List<Map<String, Object>> json = new ArrayList<>();
-        final String idSql = "SELECT id FROM animes";
-        idJson = jdbcTemplate.queryForList(idSql);
-        idJson.forEach(element -> idList.add((Long) element.get("id")));
-        idList.forEach(id ->{
-            json.add(selectById(id).get(0));
-        });
-        return json;
-    }
-
-    @Override
     public List<Map<String, Object>> getAllId() {
         final String sql = "SELECT id FROM animes";
         return jdbcTemplate.queryForList(sql);
