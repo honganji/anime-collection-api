@@ -77,6 +77,12 @@ public class JdbcAnimeRepository implements AnimeRepository{
     }
 
     @Override
+    public List<Map<String, Object>> getAllId() {
+        final String sql = "SELECT id FROM animes";
+        return jdbcTemplate.queryForList(sql);
+    }
+
+    @Override
     public boolean update(Long id, Anime anime) {
         int count = jdbcTemplate.update(
                 "UPDATE animes SET author_id=?, genre_id=?, name=?, thumbnail_url=?, trailer_id=?, mad_id=?, episode=?, series=?, description=?, story=?, started_date=? WHERE id=?",

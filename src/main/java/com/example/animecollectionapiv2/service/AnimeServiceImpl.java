@@ -30,7 +30,12 @@ public class AnimeServiceImpl implements AnimeService{
 
     @Override
     public List<Map<String, Object>> findAll() {
-        return animeRepository.selectAll();
+        List<Map<String, Object>> finalJson = new ArrayList<Map<String, Object>>();
+        List<Map<String, Object>> idJson = animeRepository.getAllId();
+        idJson.forEach(id ->{
+            finalJson.add(findById((Long) id.get("id")).get(0));
+        });
+        return finalJson;
     }
 
     @Override
