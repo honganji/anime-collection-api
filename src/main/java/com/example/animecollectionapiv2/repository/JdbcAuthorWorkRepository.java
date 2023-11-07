@@ -6,6 +6,9 @@ import org.springframework.jdbc.core.DataClassRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+import java.util.Map;
+
 @Repository
 public class JdbcAuthorWorkRepository implements AuthorWorkRepository{
     private final JdbcTemplate jdbcTemplate;
@@ -31,6 +34,12 @@ public class JdbcAuthorWorkRepository implements AuthorWorkRepository{
                 new DataClassRowMapper<>(AuthorWork.class),
                 id
         );
+    }
+
+    @Override
+    public List<Map<String, Object>> getNameByAuthorId(Long animeId) {
+        String sql = "SELECT name FROM author_works WHERE author_id=?";
+        return jdbcTemplate.queryForList(sql, animeId);
     }
 
     @Override

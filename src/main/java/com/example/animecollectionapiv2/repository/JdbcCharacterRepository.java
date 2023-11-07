@@ -5,6 +5,9 @@ import com.example.animecollectionapiv2.entity.Genre;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+import java.util.Map;
+
 @Repository
 public class JdbcCharacterRepository implements CharacterRepository{
     private final JdbcTemplate jdbcTemplate;
@@ -23,6 +26,12 @@ public class JdbcCharacterRepository implements CharacterRepository{
                 newCharacter.getName()
         );
         return count != 0;
+    }
+
+    @Override
+    public List<Map<String, Object>> getByAnimeId(Long animeId) {
+        String sql = "SELECT name, img_url, feature FROM characters WHERE anime_id=?";
+        return jdbcTemplate.queryForList(sql, animeId);
     }
 
     @Override
